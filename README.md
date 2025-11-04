@@ -1,1 +1,1 @@
-# A-Multi-Modal-Cross-Platform-Personality-Analysis-System-with-Deception-Detection
+# A MultiModal Cross-Platform Personality Analysis System with Deception-Detection
