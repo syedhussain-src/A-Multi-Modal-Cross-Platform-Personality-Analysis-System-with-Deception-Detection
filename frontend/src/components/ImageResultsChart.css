@@ -1,0 +1,50 @@
+.image-result-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 2rem;
+  color: #e0f2fe;
+  max-width: 700px;
+  margin: 2rem auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.image-chart-title {
+  color: #22d3ee;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.image-result-info {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.info-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+}
+
+.emotion-tag {
+  text-transform: capitalize;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.gender-tag {
+  margin-left: 8px;
+  font-weight: bold;
+  color: #93c5fd;
+}
+
+.emotion-description {
+  margin-top: 1.5rem;
+  color: #cbd5e1;
+  font-style: italic;
+  line-height: 1.5;
+}
