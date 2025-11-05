@@ -1,0 +1,13 @@
+flask
+werkzeug
+flask-cors
+pyjwt
+flask-pymongo
+python-dotenv
+transformers
+deepface
+pillow
+numpy
+requests
+opencv-python
+tweepy
