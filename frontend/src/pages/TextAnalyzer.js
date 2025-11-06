@@ -52,41 +52,41 @@ const TextAnalyzer = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white pt-20 pb-12">
+    <div className="min-h-screen pt-20 pb-12" style={{ backgroundColor: '#FAFAFA' }}>
       <div className="max-w-4xl mx-auto px-6">
         {/* Header Section */}
         <div className="mb-12 animate-fade-in">
           <div className="inline-block mb-6">
-            <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg" style={{ backgroundColor: '#5A5A5A' }}>
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
               </svg>
             </div>
           </div>
           
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-5xl font-bold mb-4" style={{ color: '#000000' }}>
             Text Analyzer
           </h1>
           
-          <p className="text-xl text-gray-700 max-w-2xl mb-6">
+          <p className="text-xl max-w-2xl mb-6" style={{ color: '#000000' }}>
             Discover your personality traits through advanced text analysis powered by AI
           </p>
 
-          <div className="flex items-center gap-4 text-sm text-gray-700">
+          <div className="flex items-center gap-4 text-sm" style={{ color: '#000000' }}>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" style={{ color: '#4A4A4A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span>98% Accurate</span>
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" style={{ color: '#5A5A5A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
               <span>Instant Results</span>
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" style={{ color: '#6A6A6A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
               <span>100% Private</span>
@@ -104,59 +104,68 @@ const TextAnalyzer = () => {
 
         {/* How It Works Section */}
         <div className="mt-16 animate-fade-in-delay">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: '#000000' }}>
             How It Works
           </h2>
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div className="text-center p-6 animate-slide-in" style={{ animationDelay: '0ms' }}>
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5A5A5A' }}>
                 <span className="text-white text-2xl font-bold">1</span>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Enter Your Text</h3>
-              <p className="text-gray-700">Write or paste any text - emails, social media posts, or journal entries work great.</p>
+              <h3 className="text-lg font-bold mb-2" style={{ color: '#000000' }}>Enter Your Text</h3>
+              <p style={{ color: '#000000' }}>Write or paste any text - emails, social media posts, or journal entries work great.</p>
             </div>
             <div className="text-center p-6 animate-slide-in" style={{ animationDelay: '100ms' }}>
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5A5A5A' }}>
                 <span className="text-white text-2xl font-bold">2</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">AI Analysis</h3>
-              <p className="text-gray-700">Our advanced AI analyzes linguistic patterns, word choices, and writing style.</p>
+              <h3 className="text-lg font-semibold mb-2" style={{ color: '#000000' }}>AI Analysis</h3>
+              <p style={{ color: '#000000' }}>Our advanced AI analyzes linguistic patterns, word choices, and writing style.</p>
             </div>
             <div className="text-center p-6 animate-slide-in" style={{ animationDelay: '200ms' }}>
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5A5A5A' }}>
                 <span className="text-white text-2xl font-bold">3</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Get Insights</h3>
-              <p className="text-gray-700">Receive detailed personality trait scores based on the Big Five personality model.</p>
+              <h3 className="text-lg font-semibold mb-2" style={{ color: '#000000' }}>Get Insights</h3>
+              <p style={{ color: '#000000' }}>Receive detailed personality trait scores based on the Big Five personality model.</p>
             </div>
           </div>
         </div>
 
         {/* Features Section */}
         <div className="mt-16 animate-fade-in-delay">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: '#000000' }}>
             Why Choose Our Text Analyzer
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="group relative p-6 rounded-2xl bg-white border-2 border-gray-300 hover:border-blue-600 transition-all duration-300 hover:scale-105 hover:shadow-xl overflow-hidden animate-slide-in"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="group relative p-6 rounded-2xl bg-white transition-all duration-300 hover:scale-105 hover:shadow-xl overflow-hidden animate-slide-in"
+                style={{ 
+                  animationDelay: `${index * 100}ms`,
+                  border: '2px solid #D1D1D1'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#5A5A5A';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#D1D1D1';
+                }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'linear-gradient(to bottom right, #F5F5F5, #FFFFFF)' }}></div>
                 
                 <div className="relative z-10">
-                  <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300" style={{ backgroundColor: '#5A5A5A' }}>
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={feature.icon} />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-gray-700">{feature.description}</p>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: '#000000' }}>{feature.title}</h3>
+                  <p style={{ color: '#000000' }}>{feature.description}</p>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" style={{ backgroundColor: '#5A5A5A' }}></div>
               </div>
             ))}
           </div>
@@ -164,43 +173,62 @@ const TextAnalyzer = () => {
 
         {/* Personality Traits Explanation */}
         <div className="mt-16 animate-fade-in-delay">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: '#000000' }}>
             Understanding the Big Five Traits
           </h2>
           <div className="space-y-4">
             {traits.map((trait, index) => (
               <div 
                 key={index}
-                className="group relative p-6 rounded-2xl bg-white border-2 border-gray-300 hover:border-blue-600 transition-all duration-300 hover:shadow-lg overflow-hidden animate-slide-in"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="group relative p-6 rounded-2xl bg-white transition-all duration-300 hover:shadow-lg overflow-hidden animate-slide-in"
+                style={{ 
+                  animationDelay: `${index * 100}ms`,
+                  border: '2px solid #D1D1D1'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#5A5A5A';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#D1D1D1';
+                }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'linear-gradient(to right, #F5F5F5, #FFFFFF)' }}></div>
                 
                 <div className="relative z-10 flex items-start gap-4">
-                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300" style={{ backgroundColor: '#5A5A5A' }}>
                     <span className="text-white font-bold">{trait.name[0]}</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">{trait.name}</h3>
-                    <p className="text-gray-700">{trait.description}</p>
+                    <h3 className="text-lg font-semibold mb-1" style={{ color: '#000000' }}>{trait.name}</h3>
+                    <p style={{ color: '#000000' }}>{trait.description}</p>
                   </div>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" style={{ backgroundColor: '#5A5A5A' }}></div>
               </div>
             ))}
           </div>
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 text-white text-center animate-fade-in-delay">
+        <div className="mt-16 p-8 rounded-3xl text-white text-center animate-fade-in-delay" style={{ background: 'linear-gradient(to bottom right, #5A5A5A, #3A3A3A)' }}>
           <h2 className="text-3xl font-bold mb-4">Ready to Discover Yourself?</h2>
-          <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+          <p className="mb-6 max-w-2xl mx-auto" style={{ color: '#E0E0E0' }}>
             Join thousands of users who have gained valuable insights into their personality through our advanced text analysis.
           </p>
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="bg-white text-blue-600 px-8 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            className="px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            style={{ 
+              backgroundColor: '#FFFFFF',
+              color: '#000000'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#F0F0F0';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#FFFFFF';
+            }}
           >
             Start Analyzing Now
           </button>

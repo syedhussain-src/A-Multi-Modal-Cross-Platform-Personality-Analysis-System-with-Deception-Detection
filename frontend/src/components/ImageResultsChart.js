@@ -34,7 +34,7 @@ function ImageResultsChart({ result }) {
       {
         label: "Trait Score",
         data: Object.values(personality_traits),
-        backgroundColor: ["#06b6d4", "#9333ea", "#ec4899", "#22d3ee", "#8b5cf6"],
+        backgroundColor: ["#5A5A5A", "#4A4A4A", "#3A3A3A", "#5A5A5A", "#4A4A4A"],
         borderWidth: 1,
         borderRadius: 10,
       },
@@ -48,20 +48,20 @@ function ImageResultsChart({ result }) {
       title: {
         display: true,
         text: "Personality Traits (Based on Facial Expression)",
-        color: "#61dafb",
-        font: { size: 16 },
+        color: "#3A3A3A",
+        font: { size: 16, weight: "bold" },
       },
     },
     scales: {
       y: {
         beginAtZero: true,
         max: 1,
-        ticks: { color: "#fff" },
-        grid: { color: "rgba(255,255,255,0.1)" },
+        ticks: { color: "#3A3A3A" },
+        grid: { color: "rgba(90, 90, 90, 0.3)" },
       },
       x: {
-        ticks: { color: "#fff" },
-        grid: { color: "rgba(255,255,255,0.1)" },
+        ticks: { color: "#3A3A3A" },
+        grid: { color: "rgba(90, 90, 90, 0.3)" },
       },
     },
   };
