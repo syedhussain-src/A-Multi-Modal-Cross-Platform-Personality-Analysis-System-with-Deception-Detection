@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = ({ setUser }) => {
-  const [username, setUsername] = useState(""); // ✅ using username instead of email
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -24,13 +24,12 @@ const LoginPage = ({ setUser }) => {
         throw new Error(data.error || "Login failed");
       }
 
-      // ✅ Save token & username in localStorage
       localStorage.setItem("token", data.token);
       localStorage.setItem("userName", username);
       setUser(data.token);
 
       alert("Login successful!");
-      navigate("/dashboard");
+      navigate("/text-analysis");
     } catch (err) {
       console.error("Login error:", err);
       setError(err.message || "Something went wrong");
@@ -38,38 +37,38 @@ const LoginPage = ({ setUser }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white/10 backdrop-blur-xl border border-cyan-400/30 rounded-3xl p-8 shadow-2xl">
-        <h2 className="text-3xl font-bold text-center text-cyan-400 mb-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-white backdrop-blur-xl border border-gray-300 rounded-3xl p-8 shadow-2xl">
+        <h2 className="text-3xl font-bold text-center text-black mb-8">
           Welcome Back
         </h2>
 
         {error && (
-          <div className="text-red-400 text-center mb-4 font-semibold">
+          <div className="text-red-600 text-center mb-4 font-semibold bg-red-50 border border-red-300 rounded-xl p-3">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-gray-300 mb-2">Username</label>
+            <label className="block text-gray-700 font-semibold mb-2">Username</label>
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-cyan-400 transition-all"
+              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-black placeholder-gray-500 focus:outline-none focus:border-gray-600 transition-all"
               placeholder="Enter your username"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-300 mb-2">Password</label>
+            <label className="block text-gray-700 font-semibold mb-2">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-cyan-400 transition-all"
+              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-black placeholder-gray-500 focus:outline-none focus:border-gray-600 transition-all"
               placeholder="••••••••"
               required
             />
@@ -77,15 +76,15 @@ const LoginPage = ({ setUser }) => {
 
           <button
             type="submit"
-            className="w-full px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full font-semibold text-white shadow-lg hover:shadow-cyan-500/50 transform hover:scale-105 transition-all"
+            className="w-full px-8 py-3 bg-gradient-to-r from-gray-700 to-gray-800 rounded-full font-semibold text-white shadow-lg hover:shadow-gray-700/50 transform hover:scale-105 transition-all"
           >
             Sign In
           </button>
         </form>
 
-        <p className="text-center text-gray-400 mt-4">
-          Don’t have an account?{" "}
-          <Link to="/signup" className="text-cyan-400 hover:text-cyan-300">
+        <p className="text-center text-gray-600 mt-4">
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-gray-800 font-semibold hover:text-gray-600">
             Sign up
           </Link>
         </p>

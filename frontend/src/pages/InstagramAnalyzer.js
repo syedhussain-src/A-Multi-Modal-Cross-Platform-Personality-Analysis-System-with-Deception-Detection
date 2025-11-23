@@ -1,5 +1,79 @@
 import React, { useState } from "react";
-import DonutChart from "../components/DonutChart";
+
+// DonutChart Component
+function DonutChart({ sentiment }) {
+  if (!sentiment) return null;
+
+  const { positive = 0, neutral = 0, negative = 0 } = sentiment;
+  const total = positive + neutral + negative;
+  
+  if (total === 0) return null;
+
+  const posPercent = (positive / total) * 100;
+  const neuPercent = (neutral / total) * 100;
+  const negPercent = (negative / total) * 100;
+
+  return (
+    <div className="rounded-xl p-6" style={{
+      backgroundColor: 'rgba(90, 90, 90, 0.05)',
+      border: '1px solid rgba(90, 90, 90, 0.3)'
+    }}>
+      <h4 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ color: '#3A3A3A' }}>
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Sentiment Analysis
+      </h4>
+      <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="relative w-48 h-48">
+          <svg viewBox="0 0 100 100" className="transform -rotate-90">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(90, 90, 90, 0.1)" strokeWidth="20"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#4ade80" strokeWidth="20"
+              strokeDasharray={`${posPercent * 2.51} 251`} strokeLinecap="round"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#fbbf24" strokeWidth="20"
+              strokeDasharray={`${neuPercent * 2.51} 251`} 
+              strokeDashoffset={-posPercent * 2.51} strokeLinecap="round"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#f87171" strokeWidth="20"
+              strokeDasharray={`${negPercent * 2.51} 251`}
+              strokeDashoffset={-(posPercent + neuPercent) * 2.51} strokeLinecap="round"/>
+          </svg>
+        </div>
+        <div className="flex-1 space-y-3 w-full">
+          <div className="flex items-center justify-between p-3 rounded-lg" style={{
+            backgroundColor: 'rgba(74, 222, 128, 0.1)',
+            border: '1px solid rgba(74, 222, 128, 0.3)'
+          }}>
+            <span className="flex items-center gap-2" style={{ color: '#3A3A3A' }}>
+              <span className="w-3 h-3 rounded-full bg-green-400"></span>
+              Positive
+            </span>
+            <span className="font-bold" style={{ color: '#3A3A3A' }}>{posPercent.toFixed(1)}%</span>
+          </div>
+          <div className="flex items-center justify-between p-3 rounded-lg" style={{
+            backgroundColor: 'rgba(251, 191, 36, 0.1)',
+            border: '1px solid rgba(251, 191, 36, 0.3)'
+          }}>
+            <span className="flex items-center gap-2" style={{ color: '#3A3A3A' }}>
+              <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
+              Neutral
+            </span>
+            <span className="font-bold" style={{ color: '#3A3A3A' }}>{neuPercent.toFixed(1)}%</span>
+          </div>
+          <div className="flex items-center justify-between p-3 rounded-lg" style={{
+            backgroundColor: 'rgba(248, 113, 113, 0.1)',
+            border: '1px solid rgba(248, 113, 113, 0.3)'
+          }}>
+            <span className="flex items-center gap-2" style={{ color: '#3A3A3A' }}>
+              <span className="w-3 h-3 rounded-full bg-red-400"></span>
+              Negative
+            </span>
+            <span className="font-bold" style={{ color: '#3A3A3A' }}>{negPercent.toFixed(1)}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function InstagramAnalyzer() {
   const [username, setUsername] = useState("");
@@ -98,22 +172,26 @@ function InstagramAnalyzer() {
           border: '1px solid rgba(90, 90, 90, 0.3)'
         }}>
           <div className="space-y-6">
-            {/* Connect Button (Disabled) */}
-            <button
-              className="w-full font-bold py-4 rounded-xl flex items-center justify-center gap-3 cursor-not-allowed opacity-70 hover:opacity-80 transition-opacity"
-              disabled
-              title="Instagram API connection coming soon"
+            {/* Connect Button with Link */}
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full font-bold py-4 rounded-xl flex items-center justify-center gap-3 hover:opacity-90 transition-all transform hover:scale-105"
               style={{
-                backgroundColor: 'rgba(90, 90, 90, 0.1)',
-                border: '2px solid rgba(90, 90, 90, 0.3)',
-                color: '#5A5A5A'
+                background: 'linear-gradient(to right, #E1306C, #C13584, #833AB4)',
+                color: 'white',
+                display: 'flex'
               }}
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
               </svg>
-              <span>Connect Instagram (Coming Soon)</span>
-            </button>
+              <span>Connect Instagram Account</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
 
             <div className="flex items-center gap-4">
               <hr className="flex-1" style={{ borderColor: 'rgba(90, 90, 90, 0.3)' }} />

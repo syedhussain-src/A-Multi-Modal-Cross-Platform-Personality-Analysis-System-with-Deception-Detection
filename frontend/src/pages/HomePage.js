@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 
+
 const HomePage = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -34,17 +35,17 @@ const HomePage = () => {
 
   // For demonstration - replace with navigate('/signup') etc in your actual app
   const handleStartJourney = () => {
-    console.log('Navigate to /signup');
+    console.log('Navigate to /text-analysis');
     alert('This will navigate to /signup in your app');
   };
 
   const handleWatchDemo = () => {
-    console.log('Navigate to /dashboard');
+    console.log('Navigate to /text-analysis');
     alert('This will navigate to /dashboard in your app');
   };
 
   const handleGetStarted = () => {
-    console.log('Navigate to /signup');
+    console.log('Navigate to /text-analysis');
     alert('This will navigate to /signup in your app');
   };
 

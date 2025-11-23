@@ -4,6 +4,41 @@ import ResultsChart from "../components/ResultsChart";
 
 const TextAnalyzer = () => {
   const [result, setResult] = useState(null);
+  const [deceptionResult, setDeceptionResult] = useState(null);
+
+  const handleAnalysis = async (text) => {
+    try {
+      // 1️⃣ First call text personality analysis
+      const textResponse = await fetch("http://localhost:5000/analyze/text", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      const textData = await textResponse.json();
+
+      // 2️⃣ Then call deception detection
+      const deceptionResponse = await fetch("http://localhost:5000/analyze/deception", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      const deceptionData = await deceptionResponse.json();
+
+      // 3️⃣ Combine results for unified chart display
+      const combinedResult = {
+        ...textData,
+        deception: {
+          label: deceptionData.prediction,
+          confidence: deceptionData.confidence,
+        },
+      };
+
+      setResult(combinedResult);
+      setDeceptionResult(deceptionData);
+    } catch (error) {
+      console.error("Error analyzing text:", error);
+    }
+  };
 
   const features = [
     {
@@ -96,9 +131,31 @@ const TextAnalyzer = () => {
 
         {/* Main Content */}
         <div className="space-y-8">
-          <TextInput onResult={setResult} />
+          <TextInput onAnalysis={handleAnalysis} onResult={setResult} />
           {result && (
             <ResultsChart result={result} />
+          )}
+          {/* ✅ Display deception result */}
+          {deceptionResult && (
+            <div className="p-6 rounded-2xl bg-white border-2 border-gray-300">
+              <h3 className="text-lg font-semibold mb-4" style={{ color: '#000000' }}>
+                🔍 Deception Analysis
+              </h3>
+              <div className="flex items-center gap-6">
+                <div>
+                  <p className="text-sm" style={{ color: '#666666' }}>Prediction</p>
+                  <p className="text-2xl font-bold" style={{ color: deceptionResult.prediction === 'Truthful' ? '#22C55E' : '#EF4444' }}>
+                    {deceptionResult.prediction}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm" style={{ color: '#666666' }}>Confidence</p>
+                  <p className="text-2xl font-bold" style={{ color: '#5A5A5A' }}>
+                    {deceptionResult.confidence}%
+                  </p>
+                </div>
+              </div>
+            </div>
           )}
         </div>
 

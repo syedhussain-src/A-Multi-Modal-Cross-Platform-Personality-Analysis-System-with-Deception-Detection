@@ -45,6 +45,146 @@ const ImageAnalyzer = () => {
     setLoading(false);
   };
 
+  // Download as PDF (Text format)
+  const downloadPDF = () => {
+    const timestamp = new Date().toLocaleString();
+    const content = `
+GENDER ANALYSIS REPORT
+Generated: ${timestamp}
+${'='.repeat(60)}
+
+ANALYSIS RESULTS
+----------------
+Detected Gender: ${result.gender === "uncertain" ? "Uncertain" : result.gender.toUpperCase()}
+Confidence Level: ${(result.confidence * 100).toFixed(1)}%
+
+DETAILED BREAKDOWN
+------------------
+${result.frame_genders ? result.frame_genders.map((frame, idx) => 
+  `Frame ${idx + 1}: ${frame.gender} (${(frame.confidence * 100).toFixed(1)}%)`
+).join('\n') : 'No frame data available'}
+
+${'='.repeat(60)}
+Analysis Method: AI-Powered Facial Recognition
+Privacy: All data processed securely and not stored
+${'='.repeat(60)}
+    `;
+    
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `gender_analysis_report_${Date.now()}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Download as CSV
+  const downloadCSV = () => {
+    let csv = 'Analysis Type,Result,Confidence,Timestamp\n';
+    const timestamp = new Date().toLocaleString();
+    
+    // Main result
+    csv += `Gender Analysis,"${result.gender === "uncertain" ? "Uncertain" : result.gender.toUpperCase()}",${(result.confidence * 100).toFixed(1)}%,"${timestamp}"\n`;
+    
+    // Frame details if available
+    if (result.frame_genders) {
+      csv += '\nFrame Number,Detected Gender,Confidence\n';
+      result.frame_genders.forEach((frame, idx) => {
+        csv += `${idx + 1},"${frame.gender}",${(frame.confidence * 100).toFixed(1)}%\n`;
+      });
+    }
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `gender_analysis_report_${Date.now()}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Download as Excel (HTML table format)
+  const downloadExcel = () => {
+    const timestamp = new Date().toLocaleString();
+    const htmlContent = `
+      <html xmlns:x="urn:schemas-microsoft-com:office:excel">
+      <head>
+        <meta charset="UTF-8">
+        <xml>
+          <x:ExcelWorkbook>
+            <x:ExcelWorksheets>
+              <x:ExcelWorksheet>
+                <x:Name>Gender Analysis</x:Name>
+                <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>
+              </x:ExcelWorksheet>
+            </x:ExcelWorksheets>
+          </x:ExcelWorkbook>
+        </xml>
+        <style>
+          table { border-collapse: collapse; width: 100%; }
+          th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+          th { background-color: #5A5A5A; color: white; font-weight: bold; }
+          .header { background-color: #f0f0f0; font-weight: bold; }
+        </style>
+      </head>
+      <body>
+        <h2>Gender Analysis Report</h2>
+        <p><strong>Generated:</strong> ${timestamp}</p>
+        
+        <h3>Summary</h3>
+        <table>
+          <tr>
+            <td class="header">Detected Gender</td>
+            <td>${result.gender === "uncertain" ? "Uncertain" : result.gender.toUpperCase()}</td>
+          </tr>
+          <tr>
+            <td class="header">Confidence Level</td>
+            <td>${(result.confidence * 100).toFixed(1)}%</td>
+          </tr>
+          <tr>
+            <td class="header">Analysis Method</td>
+            <td>AI-Powered Facial Recognition</td>
+          </tr>
+        </table>
+        
+        ${result.frame_genders ? `
+        <h3>Frame-by-Frame Analysis</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Frame Number</th>
+              <th>Detected Gender</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${result.frame_genders.map((frame, idx) => `
+              <tr>
+                <td>${idx + 1}</td>
+                <td>${frame.gender}</td>
+                <td>${(frame.confidence * 100).toFixed(1)}%</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        ` : ''}
+        
+        <br/>
+        <p><em>Privacy Note: All data processed securely and not stored</em></p>
+      </body>
+      </html>
+    `;
+    
+    const blob = new Blob([htmlContent], { type: 'application/vnd.ms-excel' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `gender_analysis_report_${Date.now()}.xls`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="min-h-screen pt-20 pb-12" style={{ backgroundColor: '#FAFAFA' }}>
       <div className="max-w-6xl mx-auto">
@@ -133,11 +273,10 @@ const ImageAnalyzer = () => {
             )}
           </div>
           {error && (
-  <p className="mt-3 font-medium text-center" style={{ color: '#5A5A5A' }}>
-    {error}
-  </p>
-)}
-
+            <p className="mt-3 font-medium text-center" style={{ color: '#5A5A5A' }}>
+              {error}
+            </p>
+          )}
 
           {/* Results Section */}
           {result && (
@@ -153,6 +292,53 @@ const ImageAnalyzer = () => {
                 </p>
                 <p style={{ color: '#000000' }}>
                   Confidence: {(result.confidence * 100).toFixed(1)}%
+                </p>
+              </div>
+
+              {/* Download Options */}
+              <div className="mt-8 backdrop-blur-md p-6 rounded-2xl" style={{ backgroundColor: 'rgba(200, 200, 200, 0.2)', border: '1px solid rgba(90, 90, 90, 0.3)' }}>
+                <h3 className="text-xl font-bold mb-4 text-center" style={{ color: '#3A3A3A' }}>
+                  📥 Download Analysis Report
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* PDF Download */}
+                  <button
+                    onClick={downloadPDF}
+                    className="flex items-center justify-center gap-3 py-4 rounded-xl font-semibold text-white shadow-lg hover:scale-105 transition-all"
+                    style={{ background: 'linear-gradient(to right, #DC2626, #B91C1C)' }}
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    <span>Download PDF</span>
+                  </button>
+
+                  {/* Excel Download */}
+                  <button
+                    onClick={downloadExcel}
+                    className="flex items-center justify-center gap-3 py-4 rounded-xl font-semibold text-white shadow-lg hover:scale-105 transition-all"
+                    style={{ background: 'linear-gradient(to right, #059669, #047857)' }}
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span>Download Excel</span>
+                  </button>
+
+                  {/* CSV Download */}
+                  <button
+                    onClick={downloadCSV}
+                    className="flex items-center justify-center gap-3 py-4 rounded-xl font-semibold text-white shadow-lg hover:scale-105 transition-all"
+                    style={{ background: 'linear-gradient(to right, #2563EB, #1D4ED8)' }}
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <span>Download CSV</span>
+                  </button>
+                </div>
+                <p className="text-center mt-4 text-sm" style={{ color: '#5A5A5A' }}>
+                  💡 Choose your preferred format to save the analysis results
                 </p>
               </div>
             </div>
