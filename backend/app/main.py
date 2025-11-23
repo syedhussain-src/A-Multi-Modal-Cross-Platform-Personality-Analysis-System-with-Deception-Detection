@@ -6,6 +6,8 @@ import jwt
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
+from app.routes.deception_routes import deception_bp
+
 
 # Load .env early — compute path relative to backend folder
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -27,6 +29,7 @@ try:
     from app.routes.gender_routes import gender_bp
 except Exception:
     gender_bp = None
+
 
 # ========== INIT APP ==========
 app = Flask(__name__)
@@ -51,6 +54,8 @@ app.register_blueprint(twitter_bp)
 app.register_blueprint(instagram_bp)
 if gender_bp:
     app.register_blueprint(gender_bp)
+app.register_blueprint(deception_bp, url_prefix="/analyze/deception")
+
 
 
 # ========== AUTH ROUTES (LOGIN / SIGNUP / DASHBOARD) ==========
